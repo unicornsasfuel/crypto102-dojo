@@ -1,6 +1,7 @@
 #!/usr/bin/exec-suid -- /usr/local/bin/python -I
 import sys
 from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
 from os import urandom
 from gzip import compress
 from binascii import hexlify
@@ -17,5 +18,5 @@ with open("/flag", "rb") as f:
     cipher = AES.new(key=key, mode=AES.MODE_CBC, iv=urandom(16))
     random_junk = urandom(randint(0,2))
     data = compress(flag + random_junk + sys.argv[1].encode('l1'))
-    enc_data = cipher.encrypt(data)
+    enc_data = cipher.encrypt(pad(data, 16))
     print(hexlify(enc_data).decode('l1'))
