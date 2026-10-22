@@ -1,12 +1,12 @@
 id: compress
 name: Compression oracles
 resources:
-  - id: compress_stream
+  - id: compress-stream
     name: Compression oracle (stream cipher)
     type: challenge
-  - id: compress_block
+  - id: compress-block
     name: Compression oracle (CBC)
     type: challenge
-  - id: compress_block_random
+  - id: compress-block-random
     name: Compression oracle (CBC with random length data)
     type: challenge
