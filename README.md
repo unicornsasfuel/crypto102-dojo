@@ -1,6 +1,6 @@
-# Example Dojo
+# Crypto 102
 
-This repository features an example dojo.
+This dojo is meant to be an easy cryptography dojo covering attacks not included in the Cryptography module of Intro to Cybersecurity.
 
 The dojo is defined by [dojo.yml](./dojo.yml).
 
