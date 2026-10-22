@@ -3,6 +3,5 @@ name: Cryptography 102
 type: cryptography
 award:
   emoji: 🔬
-image: pwncollege/challenge-simple
 modules:
   - id: compress
