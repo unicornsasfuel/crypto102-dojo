@@ -6,14 +6,14 @@ from gzip import compress
 from binascii import hexlify
 
 if len(sys.argv) != 2:
-    sys.exit('Usage: compress_stream <input_data>')
+    sys.exit('Usage: compress-stream <input_data>')
 
 with open("/challenge/.key","rb") as key_fh:
     key = key_fh.read().strip()
 
-with open("/flag") as f:
+with open("/flag", "rb") as f:
     flag = f.read().strip()
-    cipher = AES.new(key=key, mode=AES.MODE_CTR, iv=urandom(16))
-    data = compress(flag + sys.argv[1])
+    cipher = AES.new(key=key, mode=AES.MODE_CTR, nonce=urandom(12))
+    data = compress(flag + sys.argv[1].encode('l1'))
     enc_data = cipher.encrypt(data)
     print(hexlify(enc_data).decode('l1'))
