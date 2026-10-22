@@ -1,8 +1,12 @@
+id: compress
 name: Compression oracles
 challenges:
   - id: compress_stream
     name: Compression oracle (stream cipher)
+    description: A compression oracle using a stream cipher
   - id: compress_block
     name: Compression oracle (CBC)
+    description: A compression oracle using a block cipher
   - id: compress_block_random
     name: Compression oracle (CBC with random length data)
+    description: A compression oracle using a block cipher with random bytes added

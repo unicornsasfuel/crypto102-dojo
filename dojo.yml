@@ -1,6 +1,6 @@
 id: crypto102
 name: Cryptography 102
-type: cryptography
+type: course
 award:
   emoji: 🔬
 modules:
