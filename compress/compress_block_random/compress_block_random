@@ -1,0 +1,18 @@
+#!/usr/bin/exec-suid -- /usr/local/bin/python -I
+import sys
+from Crypto.Cipher import AES
+from os import urandom
+from gzip import compress
+from binascii import hexlify
+from random import randint
+
+with open("/challenge/.key","rb") as key_fh:
+    key = key_fh.read().strip()
+
+with open("/flag") as f:
+    flag = f.read().strip()
+    cipher = AES.new(key=key, mode=AES.MODE_CBC, iv=urandom(16))
+    random_junk = urandom(randint(0,2))
+    data = compress(flag + random_junk + sys.argv[1])
+    enc_data = cipher.encrypt(data)
+    print(hexlify(enc_data).decode('l1'))

@@ -1,0 +1,19 @@
+#!/usr/bin/exec-suid -- /usr/local/bin/python -I
+import sys
+from Crypto.Cipher import AES
+from os import urandom
+from gzip import compress
+from binascii import hexlify
+
+if len(sys.argv) != 2:
+    sys.exit('Usage: compress_stream <input_data>')
+
+with open("/challenge/.key","rb") as key_fh:
+    key = key_fh.read().strip()
+
+with open("/flag") as f:
+    flag = f.read().strip()
+    cipher = AES.new(key=key, mode=AES.MODE_CTR, iv=urandom(16))
+    data = compress(flag + sys.argv[1])
+    enc_data = cipher.encrypt(data)
+    print(hexlify(enc_data).decode('l1'))

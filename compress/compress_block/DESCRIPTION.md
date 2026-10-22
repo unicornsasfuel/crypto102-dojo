@@ -1,0 +1,1 @@
+This challenge is the same as the previous, with one small change: Instead of CTR mode, AES is being used in CBC mode, making it act as a block cipher. The same attack applies, as long as you can figure out how to determine when you've guessed the right character.

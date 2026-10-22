@@ -5,4 +5,4 @@ award:
   emoji: 🔬
 image: pwncollege/challenge-simple
 modules:
-  - id: crypto102
+  - id: compress
