@@ -1,0 +1,52 @@
+#!/usr/bin/exec-suid -- /usr/local/bin/python -I
+import sys
+from Crypto.Hash import HMAC, SHA256
+from binascii import hexlify, unhexlify
+
+with open("/challenge/.key","rb") as key_fh:
+    key = key_fh.read().strip()
+
+with open("/flag", "r") as f:
+    flag = f.read().strip()
+
+admin_logged_in = False
+
+while True:
+    cmd = input("Please input a command: ")
+
+    if cmd == "register_user":
+        username = input("Username: ").encode('l1').strip()
+        password = input("Password: ").encode('l1').strip()
+        h = HMAC.new(key, digestmod=SHA256)
+        h.update(username + b"|0|" + password)
+        print("Your login token is: " + h.hexdigest())
+
+    elif cmd == "log_in_user":
+        username = input("Username: ").encode('l1').strip()
+        password = input("Password: ").encode('l1').strip()
+        token = input("Token: ").encode('l1').strip()
+        h = HMAC.new(key, digestmod=SHA256)
+        h.update(username + "|0|" + password)
+	if token == h.hexdigest():
+            print("You are logged in as " + username)
+        else:
+            print("Log in failed")
+
+    elif cmd == "log_in_admin":
+        username = input("Username: ").encode('l1').strip()
+        password = input("Password: ").encode('l1').strip()
+        token = input("Token: ").encode('l1').strip()
+        h = HMAC.new(key, digestmod=SHA256)
+        h.update(username + "|1|" + password)
+	if token == h.hexdigest():
+            print("You are logged in as " + username)
+            admin_logged_in = True
+        else:
+            print("Log in failed")
+
+    elif cmd == "get_flag":
+        if admin_logged_in:
+            print("Here is your flag, admin: " + flag)
+   
+    else:
+        print("Available commands: register_user, log_in_user, log_in_admin, get_flag")        

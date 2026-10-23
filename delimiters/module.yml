@@ -1,0 +1,9 @@
+id: delimiters
+name: Fun with Delimiters
+resources:
+  - id: delimiter-injection
+    name: Delimiter Injection
+    type: challenge
+  - id: delimiter-oracle
+    name: Delimiter Oracle
+    type: challenge

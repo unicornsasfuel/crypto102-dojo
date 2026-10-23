@@ -1,0 +1,16 @@
+#!/usr/bin/exec-suid -- /usr/local/bin/python -I
+from Crypto.Cipher import AES
+from os import urandom
+from binascii import hexlify
+
+with open("/challenge/.key","rb") as key_fh:
+    key = key_fh.read().strip()
+
+with open("/flag", "rb") as f:
+    flag = f.read().strip()
+    nonce = urandom(12)
+    cipher = AES.new(key=key, mode=AES.MODE_CTR, nonce=nonce)
+    data = b"foo" + b"," + flag + b"," + b"bar"
+    enc_data = cipher.encrypt(data)
+    print("Here's your flag blob: ")
+    print(hexlify(nonce).decode('l1') + hexlify(enc_data).decode('l1'))

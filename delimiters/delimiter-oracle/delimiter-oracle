@@ -1,0 +1,12 @@
+#!/usr/bin/exec-suid -- /usr/local/bin/python -I
+from Crypto.Cipher import AES
+from binascii import unhexlify
+
+with open("/challenge/.key","rb") as key_fh:
+    key = key_fh.read().strip()
+
+blob = unhexlify(input("Please give me an encrypted flag blob: "))
+nonce, enc_data = blob[:12], blob[12:]
+cipher = AES.new(key=key, mode=AES.MODE_CTR, nonce=nonce)
+data = cipher.decrypt(enc_data)
+    
