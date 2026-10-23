@@ -27,7 +27,7 @@ while True:
         token = input("Token: ").encode('l1').strip()
         h = HMAC.new(key, digestmod=SHA256)
         h.update(username + "|0|" + password)
-	if token == h.hexdigest():
+        if token == h.hexdigest():
             print("You are logged in as " + username)
         else:
             print("Log in failed")
@@ -38,7 +38,7 @@ while True:
         token = input("Token: ").encode('l1').strip()
         h = HMAC.new(key, digestmod=SHA256)
         h.update(username + "|1|" + password)
-	if token == h.hexdigest():
+        if token == h.hexdigest():
             print("You are logged in as " + username)
             admin_logged_in = True
         else:
