@@ -26,7 +26,7 @@ while True:
         password = input("Password: ").encode('l1').strip()
         token = input("Token: ").encode('l1').strip()
         h = HMAC.new(key, digestmod=SHA256)
-        h.update(username + "|0|" + password)
+        h.update(username + b"|0|" + password)
         if token == h.hexdigest():
             print("You are logged in as " + username)
         else:
@@ -37,7 +37,7 @@ while True:
         password = input("Password: ").encode('l1').strip()
         token = input("Token: ").encode('l1').strip()
         h = HMAC.new(key, digestmod=SHA256)
-        h.update(username + "|1|" + password)
+        h.update(username + b"|1|" + password)
         if token == h.hexdigest():
             print("You are logged in as " + username)
             admin_logged_in = True
@@ -47,6 +47,8 @@ while True:
     elif cmd == "get_flag":
         if admin_logged_in:
             print("Here is your flag, admin: " + flag)
+        else:
+            print("Sorry, you can't get the flag until you log in as an admin.")
    
     else:
         print("Available commands: register_user, log_in_user, log_in_admin, get_flag")        
