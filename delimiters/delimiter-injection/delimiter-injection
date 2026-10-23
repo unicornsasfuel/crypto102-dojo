@@ -28,7 +28,7 @@ while True:
         h = HMAC.new(key, digestmod=SHA256)
         h.update(username + b"|0|" + password)
         if token == h.hexdigest():
-            print("You are logged in as " + username)
+            print("You are logged in as user " + username.decode('l1'))
         else:
             print("Log in failed")
 
@@ -39,7 +39,7 @@ while True:
         h = HMAC.new(key, digestmod=SHA256)
         h.update(username + b"|1|" + password)
         if token == h.hexdigest():
-            print("You are logged in as " + username)
+            print("You are logged in as admin " + username.decode('l1'))
             admin_logged_in = True
         else:
             print("Log in failed")
