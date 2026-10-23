@@ -9,4 +9,9 @@ blob = unhexlify(input("Please give me an encrypted flag blob: "))
 nonce, enc_data = blob[:12], blob[12:]
 cipher = AES.new(key=key, mode=AES.MODE_CTR, nonce=nonce)
 data = cipher.decrypt(enc_data)
-    
+
+(field1, flag, field3) = data.split(b",")
+if b"pwn.college" in flag:
+    print("This blob appears to be a valid flag blob. Thank you!")
+else:
+    print("This doesn't look like a valid flag blob to me.")
